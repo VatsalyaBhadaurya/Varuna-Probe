@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/images/sih-logo.png" alt="SIH 2026" height="90" />
+<img src="docs/images/logo.png" alt="ANANTA · VARUNA" width="420" />
 
 # VARUNA
 

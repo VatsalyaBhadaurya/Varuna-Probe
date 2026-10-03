@@ -26,7 +26,7 @@ function MetaCell({ sub, main, mono = false, align = 'left' }) {
   )
 }
 
-export default function Header({ status }) {
+export default function Header({ status, isMobile }) {
   const [now, setNow] = useState(new Date())
 
   useEffect(() => {
@@ -35,6 +35,43 @@ export default function Header({ status }) {
   }, [])
 
   const cfg = STATUS_CFG[status] ?? STATUS_CFG.OFFLINE
+
+  if (isMobile) {
+    return (
+      <header style={{
+        background:   COLORS.navy,
+        color:        COLORS.white,
+        display:      'flex',
+        alignItems:   'center',
+        gap:          '10px',
+        padding:      '8px 12px',
+        borderBottom: `2px solid ${COLORS.navyDark}`,
+        userSelect:   'none',
+      }}>
+        <img
+          src={`${import.meta.env.BASE_URL}image.png`}
+          alt="VARUNA sensor pod"
+          style={{ height: '34px', width: '34px', objectFit: 'cover', borderRadius: '4px',
+                   border: `1px solid ${COLORS.navyLight}`, flexShrink: 0 }}
+        />
+        <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 }}>
+          <span style={{ fontSize: '8px', color: '#7A9EAE', letterSpacing: '0.1em',
+                         textTransform: 'uppercase', whiteSpace: 'nowrap', overflow: 'hidden',
+                         textOverflow: 'ellipsis' }}>
+            MoES · NIOT / SIH-2026
+          </span>
+          <span style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.05em',
+                         whiteSpace: 'nowrap' }}>
+            VARUNA · SEAFLOOR SURVEY
+          </span>
+        </div>
+        <span style={{ fontSize: '11px', fontWeight: 700, color: cfg.color,
+                       letterSpacing: '0.06em', fontFamily: 'monospace', flexShrink: 0 }}>
+          {cfg.label}
+        </span>
+      </header>
+    )
+  }
 
   return (
     <header style={{

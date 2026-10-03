@@ -20,17 +20,18 @@ const TOOLTIP_PROPS = {
 }
 
 // ── Compact panel wrapper for one chart ──────────────────────────────────
-function ChartPanel({ title, unitLabel, anomaly, children }) {
+function ChartPanel({ title, unitLabel, anomaly, children, isMobile }) {
   const bg      = anomaly ? '#2A1400' : COLORS.navyDark
   const titleCl = anomaly ? COLORS.amber : COLORS.white
 
   return (
     <div style={{
-      flex:    1,
+      flex:    isMobile ? 'none' : 1,
+      height:  isMobile ? '240px' : 'auto',
       display: 'flex',
       flexDirection: 'column',
       borderBottom: `1px solid ${COLORS.border}`,
-      minHeight: 0,
+      minHeight: isMobile ? '240px' : 0,
     }}>
       <div style={{
         background:    bg,
@@ -196,12 +197,12 @@ function NoduleChart({ history, anomaly }) {
 }
 
 // ── Exported panel ───────────────────────────────────────────────────────
-export default function SensorCharts({ history, currentData }) {
+export default function SensorCharts({ history, currentData, isMobile }) {
   const hallAnomaly     = currentData?.metalDetected   ?? false
   const sulphideAnomaly = currentData?.sulphideAnomaly ?? false
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: isMobile ? 'auto' : '100%' }}>
 
       {/* Panel header */}
       <div style={{
@@ -217,15 +218,15 @@ export default function SensorCharts({ history, currentData }) {
         Sensor Time Series
       </div>
 
-      <ChartPanel title="Hall Effect Deviation" unitLabel="ADC counts" anomaly={hallAnomaly}>
+      <ChartPanel title="Hall Effect Deviation" unitLabel="ADC counts" anomaly={hallAnomaly} isMobile={isMobile}>
         <HallChart history={history} anomaly={hallAnomaly} />
       </ChartPanel>
 
-      <ChartPanel title="Time-of-Flight Distance" unitLabel="millimetres">
+      <ChartPanel title="Time-of-Flight Distance" unitLabel="millimetres" isMobile={isMobile}>
         <ToFChart history={history} />
       </ChartPanel>
 
-      <ChartPanel title="Nodule Coverage Estimate" unitLabel="percent" anomaly={sulphideAnomaly}>
+      <ChartPanel title="Nodule Coverage Estimate" unitLabel="percent" anomaly={sulphideAnomaly} isMobile={isMobile}>
         <NoduleChart history={history} anomaly={sulphideAnomaly} />
       </ChartPanel>
     </div>

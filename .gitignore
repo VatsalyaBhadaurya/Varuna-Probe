@@ -24,3 +24,10 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+
+# Demo-video project: large render artifacts, venv, raw footage
+firmware/dashboard/varuna_video/
+firmware/dashboard/video/
+
+# Office temp lock files
+~$*

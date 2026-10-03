@@ -345,7 +345,7 @@ function DepositLegend() {
 }
 
 // ── Exported component ────────────────────────────────────────────────────
-export default function OrientationModel({ currentData }) {
+export default function OrientationModel({ currentData, isMobile }) {
   const { pitch, roll } = computePitchRoll(
     currentData?.ax, currentData?.ay, currentData?.az
   )
@@ -470,11 +470,9 @@ export default function OrientationModel({ currentData }) {
           )}
         </div>
 
-        {/* Deposit legend */}
-        <DepositLegend />
-
-        {/* World-map deployment inset */}
-        <WorldMapInset />
+        {/* Deposit legend + world-map inset (hidden on mobile to avoid overlap) */}
+        {!isMobile && <DepositLegend />}
+        {!isMobile && <WorldMapInset />}
 
         {/* Source label */}
         <div style={{

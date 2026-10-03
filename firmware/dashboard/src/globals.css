@@ -9,6 +9,16 @@ html, body, #root {
   overflow: hidden;
 }
 
+/* Mobile: allow the page to grow and scroll vertically */
+@media (max-width: 768px) {
+  html, body, #root {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

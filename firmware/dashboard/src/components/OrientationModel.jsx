@@ -66,7 +66,7 @@ function ProbeRig({ pitchTarget, rollTarget, anomaly, distanceMM }) {
   const meshRef  = useRef()   // attitude (pitch/roll)
   const beamRef  = useRef()   // ToF measurement beam
   const hitRef   = useRef()   // beam contact spot on seabed
-  const geometry = useLoader(STLLoader, '/ANANTA_VARUNA_prototype_1to1.stl')
+  const geometry = useLoader(STLLoader, `${import.meta.env.BASE_URL}ANANTA_VARUNA_prototype_1to1.stl`)
 
   const [scale, setScale] = useState(1)
   const halfH = useRef(1.1)             // pod half-height after scaling

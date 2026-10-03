@@ -51,7 +51,7 @@ export default function Header({ status }) {
     }}>
       {/* Logo */}
       <img
-        src="/image.png"
+        src={`${import.meta.env.BASE_URL}image.png`}
         alt="VARUNA sensor pod"
         style={{
           height:       '36px',

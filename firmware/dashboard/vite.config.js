@@ -4,7 +4,9 @@ import react from '@vitejs/plugin-react'
 // ── Update ESP32_IP to the address printed on Serial after WiFi connects ──
 const ESP32_IP = '192.168.1.100'
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  // GitHub Pages serves this repo under /Varuna-Probe/; dev stays at root.
+  base: command === 'build' ? '/Varuna-Probe/' : '/',
   plugins: [react()],
   optimizeDeps: {
     exclude: ['hls.js'],
@@ -31,4 +33,4 @@ export default defineConfig({
       },
     },
   },
-})
+}))
